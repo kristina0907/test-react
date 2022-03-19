@@ -1,0 +1,17 @@
+.body td {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.15px;
+  color: #5E6366;
+  text-align: right;
+}
+
+.body tr > td:first-child {
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 28px;
+  letter-spacing: 0.15px;
+  color: rgba(0, 0, 0, 0.87);
+  text-align: left;
+}

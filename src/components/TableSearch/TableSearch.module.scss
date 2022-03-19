@@ -1,0 +1,26 @@
+.searchContainer input {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: rgba(0, 0, 0, 0.87);
+  border: 1px solid #C6CACC;
+  border-radius: 10px;
+  background: transparent;
+  padding: 6px 12px;
+  width: 86px;
+  text-align: right;
+}
+
+.searchContainer td {
+  border-bottom: 0;
+}
+
+.searchContainer .search {
+  text-align: left;
+}
+
+.search input {
+  width: 230px;
+  text-align: left;
+}

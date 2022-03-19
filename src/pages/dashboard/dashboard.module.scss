@@ -1,0 +1,74 @@
+.dashboard {
+  background: #E2F0F0;
+}
+
+.title {
+  font-family: 'Quicksand', sans-serif;
+  font-weight: 500;
+  font-size: 34px;
+  line-height: 42px;
+  letter-spacing: 0.25px;
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.head {
+  align-items: center;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  @media screen and (max-width: 768px) {
+    justify-content: flex-start;
+  }
+}
+
+.select {
+  border: 1px solid #C6CACC;
+  border-radius: 10px;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  letter-spacing: 0.25px;
+  color: rgba(0, 0, 0, 0.87);
+  margin-right: 8px;
+  padding: 6px 12px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.print {
+  background: #F7F9FA;
+  border-radius: 4px;
+  border: 0;
+  margin-right: 8px;
+  color: #78909C;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.print svg {
+  width: 14px;
+}
+
+.download {
+  background: #F7F9FA;
+  border-radius: 4px;
+  border: 0;
+  color: #78909C;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.download svg {
+  width: 14px;
+}

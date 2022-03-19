@@ -1,0 +1,57 @@
+.topBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  @media screen and (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.menu {
+  list-style: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.help {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: 0.44px;
+  color: #5E6366;
+  background: #F7F9FA;
+  border-radius: 10px;
+  border: 0;
+  padding: 8px 9px;
+  margin-right: 16px;
+  height: 40px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.help svg {
+  margin-left: 20px;
+  color: #C6CACC;
+}
+
+.upgrade {
+  font-size: 14px;
+  line-height: 16px;
+  letter-spacing: 0.75px;
+  text-transform: uppercase;
+  color: #367BF5;
+  background: #FFFFFF;
+  box-shadow: 0px 4px 8px rgba(54, 123, 245, 0.16), 0px 2px 4px rgba(54, 123, 245, 0.24);
+  border-radius: 10px;
+  border: 0;
+  padding: 8px 9px;
+  margin-right: 16px;
+  height: 40px;
+  cursor: pointer;
+}
+
+.user {
+  vertical-align: middle;
+}
