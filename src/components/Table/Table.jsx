@@ -1,5 +1,5 @@
 // React
-import React, {useEffect, useState} from 'react';
+import React, {useMemo, useState} from 'react';
 import {Table, TableBody, TableCell, TableContainer, TableRow} from '@mui/material';
 
 //Component
@@ -10,39 +10,50 @@ import TableSearch from "../TableSearch/TableSearch";
 import style from "./Table.module.scss";
 
 const TableFeatures = ({headCells, data, displayData}) => {
-    const [renderData, setRenderData] = useState(data);
-    const [orderBy, setOrderBy] = useState();
     const [order, setOrder] = useState('desc');
+    const [orderCell, setOrderCell] = useState({});
+    const [search, setSearch] = useState();
+    let resultFilter = data;
 
-    //Search table
-    const onSearch = (value, column) => {
-        if (value) {
-            const filteredPerson = data.filter((e) => {
-                    if (typeof value == 'number') {
-                        return e[column] == value
-                    } else {
-                        return e[column].toUpperCase().indexOf(value.toUpperCase()) >= 0
-                    }
+    const filterData = useMemo(() => {
+            if (displayData) {
+                switch (displayData) {
+                    case 'even':
+                        resultFilter = resultFilter.filter((element, index) => index % 2 != 0);
+                        break;
+                    case 'odd':
+                        resultFilter = resultFilter.filter((element, index) => index % 2 == 0);
+                        break;
                 }
-            );
-            setRenderData(filteredPerson);
-        } else {
-            setRenderData(data);
+            }
+            if (search) {
+                if (search.value) {
+                    resultFilter = resultFilter.filter((e) => {
+                            return e[search.cell].toUpperCase().indexOf(search.value.toUpperCase()) >= 0
+                        }
+                    );
+                }
+            }
+            if (orderCell) {
+                let comparator = getComparator(orderCell.cell);
+                const stabilizedThis = resultFilter.map((el, index) => [el, index]);
+                stabilizedThis.sort((a, b) => {
+                    const order = comparator(a[0], b[0]);
+                    if (order !== 0) {
+                        return order;
+                    }
+                    return a[1] - b[1];
+                });
+                resultFilter = stabilizedThis.map((el) => el[0]);
+            }
+
+            return resultFilter;
         }
-    }
+        , [displayData, search, orderCell]
+    );
+
 
     //Sort table
-    const getFilteredData = () => {
-        switch (displayData){
-            case 'all':
-                return renderData;
-            case 'even':
-                return renderData.filter((element, index) => index % 2 != 0);
-            case 'odd':
-                return renderData.filter((element, index) => index % 2 == 0)
-        }
-    }
-
     function descendingComparator(a, b, orderBy) {
         if (b[orderBy] < a[orderBy]) {
             return -1;
@@ -54,42 +65,33 @@ const TableFeatures = ({headCells, data, displayData}) => {
     }
 
     function getComparator(orderBy) {
-        setOrderBy(orderBy);
-        if (order === 'desc') {
-            setOrder('asc');
-            return (a, b) => descendingComparator(a, b, orderBy);
-        } else {
-            setOrder('desc');
-            return (a, b) => -descendingComparator(a, b, orderBy);
-        }
+        return order === 'desc'
+            ? (a, b) => descendingComparator(a, b, orderBy)
+            : (a, b) => -descendingComparator(a, b, orderBy);
     }
 
-    const createSortHandler = (id) => {
-        let comparator = getComparator(id);
-        const stabilizedThis = data.map((el, index) => [el, index]);
-        stabilizedThis.sort((a, b) => {
-            const order = comparator(a[0], b[0]);
-            if (order !== 0) {
-                return order;
-            }
-            return a[1] - b[1];
-        });
-        setRenderData(stabilizedThis.map((el) => el[0]));
+    const getOrderBy = (cell) => {
+        if (order === 'desc') {
+            setOrder('asc');
+        } else {
+            setOrder('desc');
+        }
+        setOrderCell({cell:cell,orderBy:order})
     }
     return (
         <TableContainer>
             <Table aria-label="customized table">
-                <TableHeadSort headCells={headCells} orderBy={orderBy} order={order} createSortHandler={createSortHandler}/>
+                <TableHeadSort headCells={headCells} orderCell={orderCell} getOrderBy={getOrderBy}/>
                 <TableBody className={style.body}>
-                    {!!renderData &&
-                    getFilteredData().map((row) => (
-                            <TableRow key={row.data}>
-                                {Object.keys(row).map((keyName) => (
-                                    <TableCell key={keyName}>{row[keyName]}</TableCell>
-                                ))}
-                            </TableRow>
-                        ))}
-                    <TableSearch headCells={headCells} onSearch={onSearch}/>
+                    {!!resultFilter &&
+                    filterData.map((row) => (
+                        <TableRow key={row.data}>
+                            {Object.keys(row).map((keyName) => (
+                                <TableCell key={keyName}>{row[keyName]}</TableCell>
+                            ))}
+                        </TableRow>
+                    ))}
+                    <TableSearch headCells={headCells} setSearch={setSearch}/>
                 </TableBody>
             </Table>
         </TableContainer>

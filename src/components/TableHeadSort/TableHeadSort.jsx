@@ -9,7 +9,7 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 //Style
 import style from "./TableHeadSort.module.scss";
 
-const TableHeadSort = ({headCells, orderBy, order,createSortHandler}) => {
+const TableHeadSort = ({headCells, orderCell, getOrderBy}) => {
 
     return (
         <TableHead className={style.head}>
@@ -17,10 +17,10 @@ const TableHeadSort = ({headCells, orderBy, order,createSortHandler}) => {
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
-                        onClick={() => createSortHandler(headCell.id)}
+                        onClick={() => getOrderBy(headCell.id)}
                     >
                         <TableSortLabel
-                            IconComponent={() => orderBy === headCell.id ? <DropdownIndicator order={order}/> : null}>
+                            IconComponent={() => orderCell.cell === headCell.id ? <DropdownIndicator orderBy={orderCell.orderBy}/> : null}>
                             {headCell.label}
                         </TableSortLabel>
                     </TableCell>
@@ -30,10 +30,10 @@ const TableHeadSort = ({headCells, orderBy, order,createSortHandler}) => {
     );
 };
 
-const DropdownIndicator = ({order}) => (
+const DropdownIndicator = ({orderBy}) => (
     <div className={style.dropdown}>
-        <KeyboardArrowUpIcon viewBox="0 0 20 15" className={order == 'asc' ? `${style.active}` : null}/>
-        <KeyboardArrowDownIcon viewBox="0 0 20 15" className={order == 'desc' ? `${style.active}` : null}/>
+        <KeyboardArrowUpIcon viewBox="0 0 20 15" className={orderBy == 'asc' ? `${style.active}` : null}/>
+        <KeyboardArrowDownIcon viewBox="0 0 20 15" className={orderBy == 'desc' ? `${style.active}` : null}/>
     </div>
 );
 
