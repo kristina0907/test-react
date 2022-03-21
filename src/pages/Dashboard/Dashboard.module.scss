@@ -24,7 +24,7 @@
   }
 }
 
-.select {
+.select{
   border: 1px solid #C6CACC;
   border-radius: 10px;
   font-weight: 400;
@@ -32,10 +32,31 @@
   line-height: 20px;
   letter-spacing: 0.25px;
   color: rgba(0, 0, 0, 0.87);
-  margin-right: 8px;
-  padding: 6px 12px;
-  background: transparent;
   cursor: pointer;
+  position: relative;
+  margin-right: 8px;
+  width: 232px;
+  height: 32px;
+}
+.select select{
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: 0;
+  padding: 8px 12px;
+  width: 100%;
+}
+.select:before {
+  content: "";
+  position: absolute;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg width='10' height='5' viewBox='0 0 10 5' fill='none' xmlns='http://www.w3.org/2000/svg'%3e%3cpath d='M0 0L5 5L10 0L0 0Z' fill='%2378909C'/%3e%3c/svg%3e ");
+  background-repeat: no-repeat;
+  right: 14px;
+  top: 13px;
+  z-index: 1;
+  width: 10px;
+  height: 5px;
 }
 
 .print {

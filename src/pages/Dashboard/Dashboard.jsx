@@ -1,8 +1,9 @@
 // React
+import {useState} from "react";
 import {Grid} from '@mui/material';
 
 // Style
-import style from './dashboard.module.scss';
+import style from './Dashboard.module.scss';
 
 //Components
 import SideBar from "../../components/SideBar/SideBar";
@@ -30,12 +31,13 @@ const Dashboard = () => {
         {data: 'Data3', summary1: 329, summary2: 329, summary3: 256, summary4: 32, summary5: 4},
         {data: 'Data4', summary1: 804, summary2: 804, summary3: 697, summary4: 40, summary5: 22}
     ];
+    const [displayData,setDisplayData] = useState('all')
     return (
         <div className={style.dashboard}>
             <Container>
                 <Grid container spacing={2}>
                     <Grid item md={3} xs={12}>
-                        <SideBar/>
+                        <SideBar setDisplayData={setDisplayData}/>
                     </Grid>
                     <Grid item md={9} xs={12}>
                         <Grid container spacing={2} className={style.head}>
@@ -44,15 +46,17 @@ const Dashboard = () => {
                             </Grid>
                             <Grid item md={8} xs={12}>
                                 <div className={style.control}>
-                                    <select className={style.select}>
-                                        <option value="val">Aug 21, 2021 · Sep 21 2021</option>
-                                    </select>
+                                    <div className={style.select}>
+                                        <select>
+                                            <option value="val">Aug 21, 2021 · Sep 21 2021</option>
+                                        </select>
+                                    </div>
                                     <button className={style.print}><PrintIcon/></button>
                                     <button className={style.download}><DownloadIcon/></button>
                                 </div>
                             </Grid>
                         </Grid>
-                        <Table data={data} headCells={headCells}/>
+                        <Table data={data} headCells={headCells} displayData={displayData}/>
                     </Grid>
                 </Grid>
             </Container>

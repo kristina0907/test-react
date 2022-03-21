@@ -5,16 +5,17 @@ import {Grid} from "@mui/material";
 import Container from "../../components/Container/Container";
 
 //Style
-import style from "./campaigns.module.scss"
+import style from "./Layout.module.scss";
 
-const Campaigns = () => {
+const Layout = ({children, title}) => {
 
     return (
         <Container>
             <Grid container spacing={2}>
                 <Grid item md={3} xs={12}/>
                 <Grid item md={9} xs={12}>
-                    <h1 className={style.title}>Campaigns</h1>
+                    <h1 className={style.title}>{title}</h1>
+                    {children}
                 </Grid>
             </Grid>
 
@@ -22,4 +23,4 @@ const Campaigns = () => {
     )
 }
 
-export default Campaigns;
+export default Layout;

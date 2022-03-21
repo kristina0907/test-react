@@ -6,7 +6,6 @@ import {NavLink} from "react-router-dom";
 import style from "./TopBar.module.scss"
 
 //Img
-import logo from "../../assets/images/logo.png";
 import user from "../../assets/images/user.png";
 import HelpIcon from '@mui/icons-material/Help';
 
@@ -14,7 +13,10 @@ const TopBar = () => {
     return (
         <div className={style.topBar}>
             <NavLink to="/">
-                <img src={logo} alt="Логотип"/>
+                <div className={style.logo}>
+                    <div className={style.icon}>D</div>
+                    <div className={style.title}>Dashboard</div>
+                </div>
             </NavLink>
             <ul className={style.menu}>
                 <li>

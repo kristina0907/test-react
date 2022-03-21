@@ -9,49 +9,15 @@ import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 //Style
 import style from "./TableHeadSort.module.scss";
 
-const TableHeadSort = ({headCells, data, setRenderData}) => {
-    const [orderBy, setOrderBy] = useState();
-    const [order, setOrder] = useState('desc');
+const TableHeadSort = ({headCells, orderBy, order,createSortHandler}) => {
 
-    function descendingComparator(a, b, orderBy) {
-        if (b[orderBy] < a[orderBy]) {
-            return -1;
-        }
-        if (b[orderBy] > a[orderBy]) {
-            return 1;
-        }
-        return 0;
-    }
-
-    function getComparator(orderBy) {
-        setOrderBy(orderBy);
-        if (order === 'desc') {
-            setOrder('asc');
-            return (a, b) => descendingComparator(a, b, orderBy);
-        } else {
-            setOrder('desc');
-            return (a, b) => -descendingComparator(a, b, orderBy);
-        }
-    }
-
-    const createSortHandler = (comparator) => {
-        const stabilizedThis = data.map((el, index) => [el, index]);
-        stabilizedThis.sort((a, b) => {
-            const order = comparator(a[0], b[0]);
-            if (order !== 0) {
-                return order;
-            }
-            return a[1] - b[1];
-        });
-        setRenderData(stabilizedThis.map((el) => el[0]));
-    }
     return (
         <TableHead className={style.head}>
             <TableRow>
                 {headCells.map((headCell) => (
                     <TableCell
                         key={headCell.id}
-                        onClick={() => createSortHandler(getComparator(headCell.id))}
+                        onClick={() => createSortHandler(headCell.id)}
                     >
                         <TableSortLabel
                             IconComponent={() => orderBy === headCell.id ? <DropdownIndicator order={order}/> : null}>

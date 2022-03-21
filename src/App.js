@@ -2,9 +2,9 @@ import {BrowserRouter, Redirect, Route, Switch} from "react-router-dom";
 
 import Header from "./components/Header/Header";
 // Pages
-import Dashboard from "./pages/dashboard/dashboard";
-import Campaigns from "./pages/campaigns/campaigns";
-import Configure from "./pages/configure/configure";
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Campaigns from "./pages/Campaigns/Campaigns";
+import Configure from "./pages/Configure/Configure";
 
 
 const App = () => {
