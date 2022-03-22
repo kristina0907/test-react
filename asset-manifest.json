@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/kristina0907/test-react/static/css/main.d8e9162f.css",
+    "main.js": "/kristina0907/test-react/static/js/main.19cd0a9f.js",
+    "index.html": "/kristina0907/test-react/index.html",
+    "main.d8e9162f.css.map": "/kristina0907/test-react/static/css/main.d8e9162f.css.map",
+    "main.19cd0a9f.js.map": "/kristina0907/test-react/static/js/main.19cd0a9f.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d8e9162f.css",
+    "static/js/main.19cd0a9f.js"
+  ]
+}
